@@ -1,0 +1,29 @@
+%h2 ユーザー登録
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  .field
+    = f.label :username
+    = f.text_field :username, autofocus: true, autocomplete: "username"
+
+  .field
+    = f.label :email
+    = f.email_field :email, autocomplete: "email"
+
+  .field
+    = f.label :password
+    = f.password_field :password, autocomplete: "new-password"
+
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+
+  .field
+    = f.label :profile
+    = f.text_area :profile, rows: 3
+
+  .field
+    = f.label :blog_url
+    = f.text_field :blog_url
+
+  .actions
+    = f.submit "登録", class: "btn btn-primary"
