@@ -22,6 +22,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.includes(:liked_users).find(params[:id])
+  end
+
   private
 
   def post_params

@@ -1,0 +1,20 @@
+.container
+  .row.justify-content-center
+    .col-md-8
+      %h1.text-center ポスト詳細
+
+      %p.text-center
+        = link_to "タイムラインに戻る", root_path, class: "btn btn-secondary"
+    
+      .card
+        = render partial: 'posts/post_content', locals: { post: @post }
+
+        %h4 いいねしたユーザー
+        - if @post.liked_users.any?
+          %ul
+            - @post.liked_users.each do |user|
+              %li= link_to user.username, user_path(user)
+        - else
+          %p.text-center まだいいねしたユーザーはいません。
+
+
