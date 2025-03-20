@@ -13,11 +13,12 @@
               ブログ:
               = link_to @user.blog_url, @user.blog_url, target: "_blank"
 
-          - unless @user == current_user
+          -  if current_user.present? && @user != current_user
             - if current_user.following?(@user)
               = button_to "フォロー解除", relationship_path(@user), method: :delete, class: "btn btn-danger"
             - else
               = button_to "フォローする", relationships_path(following_id: @user.id), method: :post, class: "btn btn-primary"
+
 
       %h3 投稿一覧
       - @posts.each do |post|
