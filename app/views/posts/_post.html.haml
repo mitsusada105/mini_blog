@@ -3,8 +3,10 @@
     %p
       = link_to post.user.username, user_path(post.user), class: "fw-bold"
       = ":"
-      = post.content
-    %small.text-muted= post.created_at.strftime("%Y/%m/%d %H:%M")
+    = simple_format(post.content)
+    %small.text-muted
+      | 投稿日時：
+      = post.created_at.strftime("%Y/%m/%d %H:%M")
 
     - if post.liked_users.include?(current_user)
       = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
@@ -12,3 +14,4 @@
       = button_to "いいね", post_like_path(post), method: :post, class: "btn btn-primary"
 
     %p いいね数: #{post.likes.count}
+
