@@ -36,6 +36,13 @@
                   = post.content
                 %small.text-muted= post.created_at.strftime("%Y/%m/%d %H:%M")
 
+                - if post.liked_users.include?(current_user)
+                  = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
+                - else
+                  = button_to "いいね", post_like_path(post), method: :post, class: "btn btn-primary"
+
+                %p いいね数: #{post.likes.count}
+
         - if user_signed_in?
           .tab-pane.fade#followed
             %h3 フォロータイムライン
@@ -50,3 +57,10 @@
                       = ":"
                       = post.content
                     %small.text-muted= post.created_at.strftime("%Y/%m/%d %H:%M")
+
+                    - if post.liked_users.include?(current_user)
+                      = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
+                    - else
+                      = button_to "いいね", post_like_path(post), method: :post, class: "btn btn-primary"
+
+                    %p いいね数: #{post.likes.count}

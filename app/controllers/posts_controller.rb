@@ -3,9 +3,9 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @all_posts = Post.order(created_at: :desc) # 全体タイムライン
+    @all_posts = Post.includes(:likes).order(created_at: :desc) # 全体タイムライン
     if user_signed_in?
-      @followed_posts = Post.where(user: current_user.following).order(created_at: :desc)
+      @followed_posts = Post.includes(:likes).where(user: current_user.following).order(created_at: :desc)
     else
       @followed_posts = Post.none
     end
@@ -16,8 +16,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: "投稿しました！"
     else
-      @all_posts = Post.order(created_at: :desc)
-      @followed_posts = Post.where(user: current_user.following).order(created_at: :desc)
+      @all_posts = Post.includes(:likes).order(created_at: :desc)
+      @followed_posts = Post.includes(:likes).where(user: current_user.following).order(created_at: :desc)
       render :index, status: :unprocessable_entity
     end
   end
