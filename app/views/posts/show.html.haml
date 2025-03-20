@@ -17,4 +17,12 @@
         - else
           %p.text-center まだいいねしたユーザーはいません。
 
+      %h3 コメント
+      = render @post.comments
+
+      = form_with(model: [@post, Comment.new], local: true) do |f|
+        .form-group
+          = f.text_area :content, class: 'form-control', placeholder: 'コメントを入力してください'
+        = f.submit '投稿', class: 'btn btn-primary'
+
 

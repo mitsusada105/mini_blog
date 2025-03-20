@@ -1,0 +1,5 @@
+.card.mb-2
+  .card-body
+    .comment
+      %p= simple_format(comment.content)
+      %small コメント投稿者: #{comment.user.username} / 投稿日時: #{comment.created_at.strftime("%Y/%m/%d %H:%M")}
