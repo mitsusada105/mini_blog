@@ -1,15 +1,17 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:user).order(created_at: :desc)
     @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to posts_path, notice: "投稿しました！"
     else
-      @posts = Post.order(created_at: :desc)
+      @posts = Post.includes(:user).order(created_at: :desc)
       render :index, status: :unprocessable_entity
     end
   end
@@ -20,4 +22,5 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content)
   end
 end
+
 

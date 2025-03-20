@@ -3,14 +3,24 @@
     .col-md-8
       %h1.text-center 全体タイムライン
 
-      = form_with model: @post, url: posts_path, local: true do |f|
-        .mb-3
-          = f.text_area :content, class: "form-control", rows: 3, placeholder: "今何してる？"
-        .mb-3.text-end
-          = f.submit "投稿", class: "btn btn-primary"
+      - if user_signed_in?
+        = form_with model: @post, url: posts_path, local: true do |f|
+          .mb-3
+            = f.text_area :content, class: "form-control", rows: 3, placeholder: "今何してる？"
+          .mb-3.text-end
+            = f.submit "投稿", class: "btn btn-primary"
+      - else
+        %p.text-center
+          = link_to "ログイン", new_user_session_path
+          または
+          = link_to "新規登録", new_user_registration_path
+          すると投稿できます。
 
       - @posts.each do |post|
         .card.mb-2
           .card-body
-            %p= post.content
+            %p
+              = link_to post.user.username, user_path(post.user), class: "fw-bold"
+              = ":"
+              = post.content
             %small.text-muted= post.created_at.strftime("%Y/%m/%d %H:%M")
