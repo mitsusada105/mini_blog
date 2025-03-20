@@ -3,6 +3,20 @@
     = link_to post.user.username, user_path(post.user), class: "fw-bold"
     = ":"
   = simple_format(post.content)
+
+  - if post.image.attached?
+    -# = image_tag post.image.variant(resize_to_limit: [300, 300]), alt: "投稿画像"
+    -# = image_tag url_for(post.image)
+
+    = image_tag url_for(post.image.variant(resize_to_limit: [300, 300]).processed), alt: "投稿画像"
+
+
+
+
+
+
+
+  %p
   %small.text-muted
     | 投稿日時：
     = post.created_at.strftime("%Y/%m/%d %H:%M")
