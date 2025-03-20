@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @all_posts = Post.order(created_at: :desc) # 全体タイムライン
     if user_signed_in?
-      @followed_posts = Post.where(user: current_user.following).or(Post.where(user: current_user)).order(created_at: :desc)
+      @followed_posts = Post.where(user: current_user.following).order(created_at: :desc)
     else
       @followed_posts = Post.none
     end
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       redirect_to posts_path, notice: "投稿しました！"
     else
       @all_posts = Post.order(created_at: :desc)
-      @followed_posts = Post.where(user: current_user.following).or(Post.where(user: current_user)).order(created_at: :desc)
+      @followed_posts = Post.where(user: current_user.following).order(created_at: :desc)
       render :index, status: :unprocessable_entity
     end
   end
