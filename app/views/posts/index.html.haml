@@ -29,7 +29,6 @@
           %h3 全体タイムライン
           - @all_posts.each do |post|
             = render "posts/post", post: post
-            = link_to "詳細ページ", post_path(post), class: "btn btn-link"
 
         - if user_signed_in?
           .tab-pane.fade#followed
@@ -39,4 +38,3 @@
             - else
               - @followed_posts.each do |post|
                 = render "posts/post", post: post
-                = link_to "詳細ページ", post_path(post), class: "btn btn-link"

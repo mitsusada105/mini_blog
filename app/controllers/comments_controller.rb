@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      # 投稿者へメール通知（後述のメール送信設定）
-      # CommentMailer.with(comment: @comment).new_comment.deliver_later
+      # 投稿者へメール通知
+      CommentMailer.with(comment: @comment).new_comment
       redirect_to @post, notice: 'コメントを追加しました'
     else
       redirect_to @post, alert: 'コメントの追加に失敗しました'
