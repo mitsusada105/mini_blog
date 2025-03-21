@@ -21,7 +21,9 @@
           %p
             %strong ブログURL:
             - if @user.blog_url.present?
-              = link_to @user.blog_url, @user.blog_url, target: "_blank"
+              -# blog_url に含まれる不要なタグを除去。許可するプロトコルは http と https のみ
+              - safe_blog_url = sanitize(@user.blog_url, tags: [], attributes: [], protocols: ['http', 'https'])
+              = link_to safe_blog_url, safe_blog_url, target: "_blank"
             - else
               | （なし）
 
