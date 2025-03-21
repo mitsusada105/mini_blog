@@ -25,6 +25,7 @@
           %h3 全体タイムライン
           - @all_posts.each do |post|
             = render "posts/post", post: post
+          = paginate @all_posts
 
         - if user_signed_in?
           .tab-pane.fade#followed
@@ -34,3 +35,4 @@
             - else
               - @followed_posts.each do |post|
                 = render "posts/post", post: post
+              = paginate @followed_posts

@@ -36,3 +36,4 @@
       %h3 投稿一覧
       - @posts.each do |post|
         = render "posts/post", post: post
+      = paginate @posts

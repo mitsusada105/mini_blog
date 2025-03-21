@@ -11,19 +11,14 @@
     = image_tag url_for(post.image.variant(resize_to_limit: [300, 300]).processed), alt: "投稿画像"
 
 
-
-
-
-
-
   %p
   %small.text-muted
     | 投稿日時：
     = post.created_at.strftime("%Y/%m/%d %H:%M")
 
-  - if post.liked_users.include?(current_user)
-    = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
-  - else
-    = button_to "いいね", post_like_path(post), method: :post, class: "btn btn-primary"
-
-  %p いいね数: #{post.likes.count}
+  %turbo-frame{id: "post_like_#{post.id}"}
+    - if post.liked_users.include?(current_user)
+      = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
+    - else
+      = button_to "いいね", post_like_path(post), method: :post, class: "btn btn-primary"
+    %p いいね数: #{post.likes.count}

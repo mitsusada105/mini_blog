@@ -5,10 +5,11 @@ class LikesController < ApplicationController
     @post = Post.find(params[:post_id])
     @like = @post.likes.build(user: current_user)
 
-    if @like.save
-      redirect_to root_path, notice: '投稿にいいねしました'
-    else
-      redirect_to root_path, alert: 'いいねできませんでした'
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content", locals: { post: @post })
+      end
+      format.html { redirect_to @post }
     end
   end
 
