@@ -1,0 +1,12 @@
+%header.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    %a.navbar-brand{ href: root_path } タイムライン
+    - if user_signed_in?
+      %ul.navbar-nav
+        %li.nav-item
+          = button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-link nav-link", form: { class: "d-inline" }
+
+    - else
+      %ul.navbar-nav
+        %li.nav-item
+          = link_to "ログイン", new_user_session_path, class: "nav-link"

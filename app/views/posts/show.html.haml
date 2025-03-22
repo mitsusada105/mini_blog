@@ -3,9 +3,6 @@
     .col-md-8
       %h1.text-center ポスト詳細
 
-      %p.text-center
-        = link_to "タイムラインに戻る", root_path, class: "btn btn-secondary"
-    
       .card
         = render partial: 'posts/post_content', locals: { post: @post }
 
