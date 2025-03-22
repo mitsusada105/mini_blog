@@ -45,10 +45,12 @@ gem 'html2haml'
 gem 'haml-rails'
 gem 'bootstrap', '~> 5.3'
 gem 'devise'
+gem 'devise-i18n'
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick'
 gem 'rspec-rails'
 gem "kaminari"
+gem "bootstrap_form"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        username: ユーザー名
+        password: パスワード
+        profile: プロフィール
+        blog_url: ブログURL
+        email: メールアドレス
+
+

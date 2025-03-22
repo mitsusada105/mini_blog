@@ -1,21 +1,18 @@
-%h2 ログイン
-
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  - if resource.errors.any?
-    #error_explanation
-      %h2= "#{resource.errors.count} 件のエラーがあります"
-      %ul
-        - resource.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :username, "ユーザー名"
-    = f.text_field :username, autofocus: true, autocomplete: "username"
-
-  .field
-    = f.label :password, "パスワード"
-    = f.password_field :password, autocomplete: "current-password"
-
-  .actions
-    = f.submit "ログイン"
-= render "devise/shared/links"
+.container
+  .row.justify-content-center
+    .col-md-6
+      .card
+        .card-header.text-center
+          %h2 ログイン
+        .card-body
+          = bootstrap_form_with(model: resource, url: session_path(resource_name)) do |f|
+            -# ユーザー名入力欄
+            .form-group
+              = f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control"
+            -# パスワード入力欄
+            .form-group
+              = f.password_field :password, autocomplete: "current-password", class: "form-control"
+            -# ログインボタン
+            .form-group.text-center
+              = f.submit "ログイン", class: "btn btn-primary"
+          = render "devise/shared/links"
