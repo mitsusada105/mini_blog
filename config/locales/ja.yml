@@ -3,9 +3,28 @@ ja:
     attributes:
       user:
         username: ユーザー名
+        email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード確認
         profile: プロフィール
         blog_url: ブログURL
-        email: メールアドレス
-
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "%{attribute}を入力してください"
+            username:
+              blank: "%{attribute}を入力してください"
+              invalid: "%{attribute}はアルファベット20文字以内で入力してください"
+              taken: "この%{attribute}はすでに使われています"
+            password:
+              too_short: "%{count}文字以上で入力してください"
+  errors:
+    messages:
+      blank: "%{attribute}を入力してください"
+      taken: "%{attribute}はすでに使用されています"
+      invalid: "%{attribute}は正しくありません"
+      too_short: "%{attribute}は%{count}文字以上で入力してください"
+      confirmation: "%{attribute}と一致しません"
 
