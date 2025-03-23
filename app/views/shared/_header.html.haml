@@ -1,16 +1,20 @@
 %header.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
   .container
-    %a.navbar-brand{ href: root_path } 全体タイムライン
-
-    - if user_signed_in?
-      %ul.navbar-nav
-        %li.nav-item
+    %ul.navbar-nav.d-flex.flex-row.justify-content-around.w-100
+      %li.nav-item.mx-2
+        = link_to "全体タイムライン", root_path, class: "nav-link"
+      - if user_signed_in?
+        %li.nav-item.mx-2
           = link_to "フォロータイムライン", following_posts_path, class: "nav-link"
-        %li.nav-item
-          = button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-link nav-link", form: { class: "d-inline" }
-    - else
-      %ul.navbar-nav
-        %li.nav-item
+        %li.nav-item.mx-2
+          = link_to "プロフィール", user_path(current_user), class: "nav-link"
+        %li.nav-item.mx-2
+          = button_to "ログアウト", destroy_user_session_path,
+              method: :delete,
+              class: "btn btn-link nav-link",
+              form: { class: "d-inline" }
+      - else
+        %li.nav-item.mx-2
           = link_to "ログイン", new_user_session_path, class: "nav-link"
 
 - flash.each do |key, message|
