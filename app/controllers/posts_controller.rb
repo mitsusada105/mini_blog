@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @all_posts = Post.includes(:likes).order(created_at: :desc).page(params[:page]).per(10) # 全体タイムライン
+    @all_posts = Post.includes(:likes).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def following
@@ -16,7 +16,6 @@ class PostsController < ApplicationController
       redirect_to posts_path, notice: "投稿しました！"
     else
       @all_posts = Post.includes(:likes).order(created_at: :desc).page(params[:page]).per(10)
-      @followed_posts = Post.includes(:likes).where(user: current_user.following).order(created_at: :desc).page(params[:page]).per(10)
       render :index, status: :unprocessable_entity
     end
   end

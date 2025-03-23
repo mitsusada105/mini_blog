@@ -1,6 +1,6 @@
 .card-body
   %p
-    = link_to post.user.username, user_path(post.user), class: "fw-bold"
+    = link_to post.user.username, user_path(post.user), class: "fw-bold", data: { turbo: false }
     = ":"
   = simple_format(post.content)
 
