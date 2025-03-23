@@ -4,11 +4,10 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @all_posts = Post.includes(:likes).order(created_at: :desc).page(params[:page]).per(10) # 全体タイムライン
-    if user_signed_in?
-      @followed_posts = Post.includes(:likes).where(user: current_user.following).order(created_at: :desc).page(params[:page]).per(10)
-    else
-      @followed_posts = Post.none
-    end
+  end
+
+  def following
+    @followed_posts = Post.includes(:likes).where(user: current_user.following).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def create

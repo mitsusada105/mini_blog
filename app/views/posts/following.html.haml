@@ -1,0 +1,11 @@
+.container
+  .row.justify-content-center
+    .col-md-8
+      %h1.text-center フォロータイムライン
+      = turbo_frame_tag "followed_posts", class: "d-block w-100" do
+        - if @followed_posts.empty?
+          %p.text-center まだフォローしているユーザーがいません。
+        - else
+          - @followed_posts.each do |post|
+            = render "posts/post", post: post
+          = paginate @followed_posts

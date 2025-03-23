@@ -1,5 +1,6 @@
-.card
+.card.my-4
   .card-body
+    %h4.card-title 投稿フォーム
     = form_with model: @post, local: true do |f|
       .form-group
         = f.label :content, "投稿内容"

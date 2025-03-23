@@ -1,8 +1,11 @@
-%header.navbar.navbar-expand-lg.navbar-light.bg-light
+%header.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
   .container
-    %a.navbar-brand{ href: root_path } タイムライン
+    %a.navbar-brand{ href: root_path } 全体タイムライン
+
     - if user_signed_in?
       %ul.navbar-nav
+        %li.nav-item
+          = link_to "フォロータイムライン", following_posts_path, class: "nav-link"
         %li.nav-item
           = button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-link nav-link", form: { class: "d-inline" }
     - else
@@ -12,6 +15,6 @@
 
 - flash.each do |key, message|
   - alert_class = key == "alert" ? "danger" : "info"
-  .container.mt-3
+  .container.mt-5
     .alert{ class: "alert alert-#{alert_class}", role: "alert" }
       = message

@@ -1,11 +1,10 @@
 .container
   .row.justify-content-center
     .col-md-8
-      %h1.text-center タイムライン
+      %h1.text-center 全体タイムライン
 
       - if user_signed_in?
         = render "posts/form"
-
       - else
         %p.text-center
           = link_to "ログイン", new_user_session_path
@@ -13,28 +12,7 @@
           = link_to "新規登録", new_user_registration_path
           すると投稿できます。
 
-      %ul.nav.nav-tabs
-        %li.nav-item
-          = link_to "全体タイムライン", "#all", class: "nav-link active", data: { bs_toggle: "tab" }
-        - if user_signed_in?
-          %li.nav-item
-            = link_to "フォロータイムライン", "#followed", class: "nav-link", data: { bs_toggle: "tab" }
-
-      .tab-content.mt-3
-        .tab-pane.fade.show.active#all
-          %h3 全体タイムライン
-          = turbo_frame_tag "all_posts", class: "d-block w-100" do
-            - @all_posts.each do |post|
-              = render "posts/post", post: post
-            = paginate @all_posts
-
-        - if user_signed_in?
-          .tab-pane.fade#followed
-            %h3 フォロータイムライン
-            = turbo_frame_tag "followed_posts", class: "d-block w-100" do
-              - if @followed_posts.empty?
-                %p.text-center まだフォローしているユーザーがいません。
-              - else
-                - @followed_posts.each do |post|
-                  = render "posts/post", post: post
-                = paginate @followed_posts
+      = turbo_frame_tag "all_posts", class: "d-block w-100" do
+        - @all_posts.each do |post|
+          = render "posts/post", post: post
+        = paginate @all_posts
