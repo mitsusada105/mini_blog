@@ -23,16 +23,18 @@
       .tab-content.mt-3
         .tab-pane.fade.show.active#all
           %h3 全体タイムライン
-          - @all_posts.each do |post|
-            = render "posts/post", post: post
-          = paginate @all_posts
+          = turbo_frame_tag "all_posts", class: "d-block w-100" do
+            - @all_posts.each do |post|
+              = render "posts/post", post: post
+            = paginate @all_posts
 
         - if user_signed_in?
           .tab-pane.fade#followed
             %h3 フォロータイムライン
-            - if @followed_posts.empty?
-              %p.text-center まだフォローしているユーザーがいません。
-            - else
-              - @followed_posts.each do |post|
-                = render "posts/post", post: post
-              = paginate @followed_posts
+            = turbo_frame_tag "followed_posts", class: "d-block w-100" do
+              - if @followed_posts.empty?
+                %p.text-center まだフォローしているユーザーがいません。
+              - else
+                - @followed_posts.each do |post|
+                  = render "posts/post", post: post
+                = paginate @followed_posts
