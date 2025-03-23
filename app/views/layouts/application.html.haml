@@ -8,15 +8,17 @@
     %meta{:content => "yes", :name => "mobile-web-app-capable"}/
     = csrf_meta_tags
     = csp_meta_tag
+    = turbo_include_tags
+    = javascript_importmap_tags
+    = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", rel: "stylesheet"
+
     = yield :head
     %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
     %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
-    = javascript_importmap_tags
-    = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", rel: "stylesheet"
 
   %body
     = render "shared/header"
-
     = yield
-    = javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", type: "module"
+    = javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+

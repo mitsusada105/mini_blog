@@ -1,7 +1,11 @@
 import "@hotwired/turbo-rails"
 import "@popperjs/core"
 import "bootstrap"
-import "controllers"
+import "./controllers"
+
+// Turboを明示的に開始
+import * as Turbo from "@hotwired/turbo-rails"
+Turbo.start()
 
 // Bootstrap のタブ機能を有効化
 document.addEventListener("DOMContentLoaded", function() {

@@ -3,13 +3,12 @@ class LikesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @like = @post.likes.build(user: current_user)
+    @like = @post.likes.create(user: current_user)
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content", locals: { post: @post })
+        render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post })
       end
-      format.html { redirect_to @post }
     end
   end
 
@@ -19,7 +18,7 @@ class LikesController < ApplicationController
 
     if @like
       @like.destroy
-      redirect_to root_path, notice: 'いいねを解除しました'
+      render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post })
     else
       redirect_to root_path, alert: 'いいね解除に失敗しました'
     end
