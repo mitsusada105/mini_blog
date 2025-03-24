@@ -1,17 +1,13 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
+  before_action :set_all_posts, only: [:index, :create]
 
   def index
     @post = Post.new
-    if user_signed_in?
-      @all_posts = Post.includes(:user, :liked_users, :image_attachment).order(created_at: :desc).page(params[:page]).per(10)
-    else
-      @all_posts = Post.includes(:user, :image_attachment).order(created_at: :desc).page(params[:page]).per(10)
-    end
   end  
 
   def following
-    @followed_posts = Post.includes(:user, :liked_users, :image_attachment).where(user: current_user.following).order(created_at: :desc).page(params[:page]).per(10)
+    @followed_posts = build_post_scope(Post.where(user: current_user.following))
   end
 
   def create
@@ -20,7 +16,6 @@ class PostsController < ApplicationController
       redirect_to posts_path, notice: "投稿しました！"
     else
       flash.now[:alert] = @post.errors.full_messages.join("、")
-      @all_posts = Post.includes(:user, :liked_users, :image_attachment).order(created_at: :desc).page(params[:page]).per(10)
       render :index, status: :unprocessable_entity
     end
   end
@@ -35,6 +30,17 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content, :image)
   end
+
+  def set_all_posts
+    @all_posts = build_post_scope
+  end
+
+  def build_post_scope(scope = Post.all)
+    scope = scope.includes(:user, :image_attachment)
+    scope = scope.includes(:liked_users) if user_signed_in?
+    scope.order(created_at: :desc).page(params[:page]).per(Post::PER_PAGE)
+  end  
+
 end
 
 

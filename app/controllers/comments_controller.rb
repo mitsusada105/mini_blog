@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!  # ユーザー登録が必要な場合
+  before_action :authenticate_user!
 
   def create
     @post = Post.find(params[:post_id])
@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      # 投稿者へメール通知
       CommentMailer.with(comment: @comment).new_comment.deliver_later
       redirect_to @post, notice: 'コメントを追加しました'
     else

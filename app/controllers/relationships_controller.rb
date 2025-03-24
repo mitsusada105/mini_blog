@@ -13,4 +13,3 @@ class RelationshipsController < ApplicationController
     redirect_to user_path(user), notice: "#{user.username} のフォローを解除しました。"
   end
 end
-

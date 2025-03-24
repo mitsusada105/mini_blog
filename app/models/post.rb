@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  PER_PAGE = 10
+
   belongs_to :user
   has_one_attached :image
   has_many :likes, dependent: :destroy
