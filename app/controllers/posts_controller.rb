@@ -19,6 +19,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: "投稿しました！"
     else
+      flash.now[:alert] = @post.errors.full_messages.join("、")
       @all_posts = Post.includes(:user, :liked_users, :image_attachment).order(created_at: :desc).page(params[:page]).per(10)
       render :index, status: :unprocessable_entity
     end
