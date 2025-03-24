@@ -1,1 +1,66 @@
-メール内容
+!!!
+%html
+  %head
+    %meta{ charset: "UTF-8" }
+    :css
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: #4CAF50;
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 10px;
+      }
+
+      .post {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .rank {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .likes {
+        font-size: 14px;
+        color: #888;
+      }
+
+      a {
+        color: #2a7ae2;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+  %body
+    .container
+      %h1 前日の「いいね」数ランキング TOP10
+
+      - @posts.each_with_index do |post, index|
+        .post
+          %div.rank= "#{index + 1}位："
+          %div
+            投稿内容：
+            = link_to truncate(post.content, length: 100), post_url(post), target: "_blank"
+          %div
+            投稿者：
+            = link_to post.user.username, user_url(post.user), target: "_blank"
+          %div.likes= "いいね数：#{post.likes.count}"

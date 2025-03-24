@@ -2,7 +2,8 @@ namespace :notify do
   desc "前日のいいね数ランキングメール通知"
   task like_ranking: :environment do
     yesterday = Date.yesterday
-    top_posts = Post.joins(:likes)
+    top_posts = Post.includes(:user)
+                    .joins(:likes)
                     .where(created_at: yesterday.all_day)
                     .group("posts.id")
                     .order("COUNT(likes.id) DESC")
