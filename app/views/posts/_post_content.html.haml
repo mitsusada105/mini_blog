@@ -16,4 +16,5 @@
     | 投稿日時：
     = post.created_at.strftime("%Y/%m/%d %H:%M")
 
-  = render "posts/post_content_like", post: post
+  - if user_signed_in?
+    = render "posts/post_content_like", post: post
