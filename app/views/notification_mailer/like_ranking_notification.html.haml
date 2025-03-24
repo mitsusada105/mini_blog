@@ -63,4 +63,4 @@
           %div
             投稿者：
             = link_to post.user.username, user_url(post.user), target: "_blank"
-          %div.likes= "いいね数：#{post.likes.count}"
+          %div.likes= "いいね数：#{post.likes_count}"

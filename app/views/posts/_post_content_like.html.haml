@@ -3,4 +3,4 @@
     = button_to "いいね解除", post_like_path(post), method: :delete, class: "btn btn-warning"
   - else
     = button_to "いいね", post_like_path(post), method: :post, data: { turbo_stream: true }, class: "btn btn-primary"
-  %p いいね数: #{post.likes.count}
+  %p いいね数: #{post.likes_count}
