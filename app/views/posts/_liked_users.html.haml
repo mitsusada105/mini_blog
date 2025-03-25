@@ -1,0 +1,7 @@
+%turbo-frame{id: "post_liked_users"}
+  - if post.liked_users.any?
+    %ul
+      - post.liked_users.each do |user|
+        %li= link_to user.username, user_path(user)
+  - else
+    %p.text-center まだいいねしたユーザーはいません。

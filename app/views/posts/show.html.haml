@@ -4,15 +4,10 @@
       %h1.text-center ポスト詳細
 
       .card
-        = render partial: 'posts/post_content', locals: { post: @post }
+        = render "posts/post_content", post: @post
 
         %h4 いいねしたユーザー
-        - if @post.liked_users.any?
-          %ul
-            - @post.liked_users.each do |user|
-              %li= link_to user.username, user_path(user)
-        - else
-          %p.text-center まだいいねしたユーザーはいません。
+        = render "posts/liked_users", post: @post
 
       %h3 コメント
       = render @comments

@@ -22,7 +22,7 @@
               - safe_blog_url = sanitize(@user.blog_url, tags: [], attributes: [], protocols: ['http', 'https'])
               = link_to safe_blog_url, safe_blog_url, target: "_blank"
             - else
-              | （なし）
+              （なし）
 
           - if current_user.present? && @user != current_user
             - if current_user.following?(@user)

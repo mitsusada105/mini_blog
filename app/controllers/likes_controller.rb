@@ -7,7 +7,10 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post })
+        render turbo_stream: [
+          turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post }),
+          turbo_stream.replace("post_liked_users", partial: "posts/liked_users", locals: { post: @post })
+        ]
       end
     end
   end
@@ -20,6 +23,9 @@ class LikesController < ApplicationController
       @like.destroy
     end
 
-    render turbo_stream: turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post })
+    render turbo_stream: [
+      turbo_stream.replace("post_like_#{@post.id}", partial: "posts/post_content_like", locals: { post: @post }),
+      turbo_stream.replace("post_liked_users", partial: "posts/liked_users", locals: { post: @post })
+    ]
   end
 end
