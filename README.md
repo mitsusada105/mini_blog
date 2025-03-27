@@ -1,24 +1,22 @@
-# README
+# Mini Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
+シンプルなマイクロブログアプリケーションです。ユーザーは短い投稿を共有し、他のユーザーをフォローしたり、投稿に「いいね」をつけたりすることができます。
 
-Things you may want to cover:
+## 主な機能
+- ユーザー認証（サインアップ、ログイン、ログアウト）
+- 投稿の作成・表示
+- 画像のアップロード機能
+- いいね機能
+- フォロー/フォロワー機能
+- コメント機能
+- いいねランキングの日次メール通知
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 技術スタック
+- Ruby 3.4.2
+- Rails 8.0.2
+- PostgreSQL
+- Bootstrap 5.3
+- Hotwire (Turbo)
+- Stimulus
+- Importmap Rails

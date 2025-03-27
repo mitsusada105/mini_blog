@@ -36,6 +36,7 @@ class PostsController < ApplicationController
   end
 
   def build_post_scope(scope = Post.all)
+    #表示する投稿を絞り込む
     scope = scope.includes(:user, :image_attachment)
     scope = scope.includes(:liked_users) if user_signed_in?
     scope.order(created_at: :desc).page(params[:page]).per(Post::PER_PAGE)
