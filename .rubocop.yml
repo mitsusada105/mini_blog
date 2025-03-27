@@ -1,8 +1,15 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+# .rubocop.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# rubocop-rails-omakase が提供する共通ルールを読み込み
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+# 必要な拡張機能（Railsルールなど）を読み込む
+plugins:
+  - rubocop-rails
+
+# ↓ここから下に、自分たちの独自ルールを上書き・追加できる
+
+# 例：配列の中のスペースチェックを無効にする
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
