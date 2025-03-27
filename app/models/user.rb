@@ -20,8 +20,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP, message: "正しいメールアドレス形式で入力してください" }
-  
-  
+
+
   validates :profile, length: { maximum: 200 }, allow_blank: true
   validates :blog_url, format: { with: URI::DEFAULT_PARSER.make_regexp, message: "正しいURL形式で入力してください" }, allow_blank: true
 

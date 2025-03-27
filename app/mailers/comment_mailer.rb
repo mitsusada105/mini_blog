@@ -3,7 +3,6 @@ class CommentMailer < ApplicationMailer
     @comment = params[:comment]
     @post = @comment.post
     @post_owner = @post.user
-    mail(to: @post_owner.email, subject: 'あなたの投稿に新しいコメントが付きました')
+    mail(to: @post_owner.email, subject: "あなたの投稿に新しいコメントが付きました")
   end
 end
-

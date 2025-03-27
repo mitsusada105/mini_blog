@@ -13,22 +13,21 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "posts#index"
 
-  resources :posts, only: [:index, :create, :show] do
-    resource :like, only: [:create, :destroy]
-    resources :comments, only: [:create]
+  resources :posts, only: [ :index, :create, :show ] do
+    resource :like, only: [ :create, :destroy ]
+    resources :comments, only: [ :create ]
     collection do
       get :following
     end
   end
-  resources :users, only: [:show] do
+  resources :users, only: [ :show ] do
     member do
       get :following, :followers
     end
   end
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [ :create, :destroy ]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end  
-
+  end
 end

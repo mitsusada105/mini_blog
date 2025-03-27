@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
 
     if @comment.save
       CommentMailer.with(comment: @comment).new_comment.deliver_later
-      redirect_to @post, notice: 'コメントを追加しました'
+      redirect_to @post, notice: "コメントを追加しました"
     else
-      redirect_to @post, alert: 'コメントの追加に失敗しました'
+      redirect_to @post, alert: "コメントの追加に失敗しました"
     end
   end
 

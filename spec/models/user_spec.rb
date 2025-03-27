@@ -93,7 +93,7 @@ RSpec.describe User, type: :model do
   # --- Devise のオーバーライドメソッドのテスト ---
   describe 'Devise のオーバーライド' do
     let(:user) { build(:user) }
-    
+
     it '#email_required? は false を返すこと' do
       expect(user.email_required?).to be_falsey
     end

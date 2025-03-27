@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
-  before_action :set_all_posts, only: [:index, :create]
+  before_action :authenticate_user!, only: [ :create ]
+  before_action :set_all_posts, only: [ :index, :create ]
 
   def index
     @post = Post.new
-  end  
+  end
 
   def following
     @followed_posts = build_post_scope(Post.where(user: current_user.following))
@@ -39,8 +39,5 @@ class PostsController < ApplicationController
     scope = scope.includes(:user, :image_attachment)
     scope = scope.includes(:liked_users) if user_signed_in?
     scope.order(created_at: :desc).page(params[:page]).per(Post::PER_PAGE)
-  end  
-
+  end
 end
-
-
